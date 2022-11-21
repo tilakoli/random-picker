@@ -3,10 +3,31 @@ import { FaBookmark } from "react-icons/fa";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { FaGlobeAmericas } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import Loader from "../loader/loader";
+import SecondLoader from "../secondLoader/index";
 
-const index = () => {
+const Index = (props) => {
+  console.log(props);
+  const [showLoader, setShowLoader] = React.useState(false);
+  const [showSecondLoader, setShowSecondLoader] = React.useState(false);
+  const [showResultDiv, setShowResultDiv] = React.useState(false);
+  const [showFinalResult, setShowFinalResult] = React.useState(false);
+
+  const handleClick = () => {
+    setShowLoader(true);
+    console.log("here");
+    setTimeout(() => {
+      setShowLoader(false);
+      setShowResultDiv(true);
+      setShowSecondLoader(true);
+      setTimeout(() => {
+        setShowSecondLoader(false);
+        setShowFinalResult(true);
+      }, 2000);
+    }, 3000);
+  };
   return (
-    <div className="h-screen w-screen ">
+    <div className="w-screen h-screen ">
       {/* Navbar div  */}
       <div className="w-full bg-[#616161]">
         <div className="flex justify-between py-[8px] px-[16px] items-center">
@@ -20,7 +41,7 @@ const index = () => {
 
         <div className="flex w-full justify-between pr-8 bg-black py-[8px] px-[16px]">
           <div className="w-1/3">
-            <ul className="flex justify-start items-center h-full">
+            <ul className="flex items-center justify-start h-full">
               <li className="pr-10 pl-7">Home</li>
               <li className="pr-10">Randomness</li>
               <li className="pr-10">Random Picker</li>
@@ -28,7 +49,7 @@ const index = () => {
           </div>
 
           <div className="w-2/3">
-            <ul className="flex justify-end items-center h-full">
+            <ul className="flex items-center justify-end h-full">
               <li className=" py-[8px] px-[16px]">
                 <FaBookmark />
               </li>
@@ -58,7 +79,7 @@ const index = () => {
               <h3 className="uppercase my-[10px] text-black">ALL tools</h3>
             </div>
             {/* links */}
-            <div className="h-full w-full links">
+            <div className="w-full h-full links">
               <div className="w-full text-[#444] p-[18px] cursor-pointer text-left bg-[#eee] flex hover:bg-[#D6D6D6] justify-between">
                 <div>PWA (Progressive Web App) Tools (18)</div>
                 <div className="flex items-end text-[#777] font-bold ml-[5px]">
@@ -140,20 +161,22 @@ const index = () => {
         </div>
 
         {/* Main body  */}
+
+        {showLoader && <Loader />}
         <div className="w-full  ml-[260px] h-full flex py-[12px] px-[24px] text-black ">
           {/* outer div  */}
-          <div className="h-full w-[77%] py-[12px] px-[24px] bg-[#F1F1F1] shadow ">
-            <div className="h-full w-full ">
+          <div className=" h-full w-[77%] py-[12px] px-[24px] bg-[#F1F1F1] shadow ">
+            <div className="w-full h-full ">
               <div className="">
-                <div className="flex  gap-3 pt-6 ">
+                <div className="flex gap-3 pt-6 ">
                   <h1>Random Picker</h1>
                   <h2>icon</h2>
                 </div>
               </div>
             </div>
             {/* div with textarea  */}
-            <div className="shadow p-6 pb-12">
-              <div className="w-full h-full mb-6 mt-2 ">
+            <div className="p-6 pb-12 shadow">
+              <div className="w-full h-full mt-2 mb-6 ">
                 <span className="text-[#000000] font-bold">
                   Enter all items (names, numbers...) in the field below, each
                   on a separate line:
@@ -177,13 +200,34 @@ const index = () => {
                 </p>
               </div>
 
-              <div className="w-full mt-[8px]  bg-[#3A8338] cursor-pointer p-[15px] rounded-[4px] text-white flex justify-center">
+              <div
+                onClick={handleClick}
+                className="w-full mt-[8px]  bg-[#3A8338] cursor-pointer p-[15px] rounded-[4px] text-white flex justify-center"
+              >
                 <button>Pick a Random Item</button>
               </div>
             </div>
 
+            {/* Results div  */}
+            {showResultDiv && (
+              <div className="absolute z-40 w-[62.5%] h-64 mt-12 bg-[#F1F1F1] flex items-center justify-center  ">
+                {showSecondLoader && <SecondLoader />}
+                {showFinalResult && (
+                  <div>
+                    <h4 className="t2">The Winner is:</h4>
+                    <div className="glow">
+                      <h1>{props.winnerValue}</h1>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
             {/* ad image  */}
-            <div className=" pt-5 pb-3 flex justify-center">
+            <div
+              className={`relative flex justify-center pt-5 pb-3 ${
+                showResultDiv ? "mt-80" : "mt-0"
+              }`}
+            >
               <img src="adbanner1.png" alt="ad1" />
             </div>
 
@@ -274,7 +318,7 @@ const index = () => {
                   Miniwebtool
                 </p>
               </div>
-              <div className="dummyboxes1 flex justify-between">
+              <div className="flex justify-between dummyboxes1">
                 <button>Link To This Tool</button>
                 <div>+</div>
               </div>
@@ -287,7 +331,7 @@ const index = () => {
               <div className="dummyboxes1">
                 <a href="#">Upgrade To Premium</a>
               </div>
-              <div className="dummyboxes1 flex justify-between">
+              <div className="flex justify-between dummyboxes1">
                 <button>My Tool Box</button>
                 <div>+</div>
               </div>
@@ -303,4 +347,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
