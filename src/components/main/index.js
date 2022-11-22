@@ -19,6 +19,7 @@ const Index = (props) => {
 
   const handleClickSetter = () => {
     window.alert("Done!");
+
     setShowSetter(!showSetter);
   };
   const handleToggleSetter = () => {
