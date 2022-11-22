@@ -5,6 +5,7 @@ import { FaGlobeAmericas } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import Loader from "../loader/loader";
 import SecondLoader from "../secondLoader/index";
+// import Setter from "../setter/index";
 
 const Index = (props) => {
   console.log(props);
@@ -12,10 +13,18 @@ const Index = (props) => {
   const [showSecondLoader, setShowSecondLoader] = React.useState(false);
   const [showResultDiv, setShowResultDiv] = React.useState(false);
   const [showFinalResult, setShowFinalResult] = React.useState(false);
+  const [showSetter, setShowSetter] = React.useState(false);
+  const [winnerCode, setWinnerCode] = React.useState("");
+  const handleChange = (event) => setWinnerCode(event.target.value);
 
+  const handleClickSetter = () => {
+    window.alert("Done!", winnerCode);
+  };
+  const handleToggleSetter = () => {
+    setShowSetter(!showSetter);
+  };
   const handleClick = () => {
     setShowLoader(true);
-    console.log("here");
     setTimeout(() => {
       setShowLoader(false);
       setShowResultDiv(true);
@@ -216,7 +225,7 @@ const Index = (props) => {
                   <div>
                     <h4 className="t2">The Winner is:</h4>
                     <div className="glow">
-                      <h1>{props.winnerValue}</h1>
+                      <h1>{winnerCode}</h1>
                     </div>
                   </div>
                 )}
@@ -306,6 +315,35 @@ const Index = (props) => {
                   and browser support PWA.
                 </h4>
               </div>
+              <div
+                className="dummyboxes hover:bg-[#D6D6D6] flex justify-between"
+                onClick={handleToggleSetter}
+              >
+                <h4>Terms and Conditions?</h4>
+                <div>+</div>
+              </div>{" "}
+              {/* --------------------------------- setter component here ----------------------- */}
+              {showSetter && (
+                <div>
+                  <div>
+                    <div className="flex items-center justify-center w-64 h-64 m-auto bg-gray-400 ">
+                      <div className="flex flex-col items-center">
+                        <input
+                          onChange={handleChange}
+                          className="w-56 h-12 p-2 text-black border"
+                          placeholder="Enter value to set"
+                        />
+                        <button
+                          onClick={handleClickSetter}
+                          className="px-6 py-2 mt-5 bg-green-600 rounded-md w-28"
+                        >
+                          submit{" "}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

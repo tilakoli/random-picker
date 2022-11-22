@@ -5,12 +5,11 @@ const Index = (props) => {
   const handleChange = (event) => setWinnerCode(event.target.value);
 
   const handleClick = () => {
-    props.setWinnerValue(winnerCode);
-    window.alert("value set");
+    window.alert("Done!", winnerCode);
   };
   return (
     <div>
-      <div className="flex items-center justify-center w-screen h-screen bg-gray-400 ">
+      <div className="flex items-center justify-center w-64 h-64 m-auto bg-gray-400 ">
         <div className="flex flex-col items-center">
           <input
             onChange={handleChange}
