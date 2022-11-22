@@ -18,7 +18,8 @@ const Index = (props) => {
   const handleChange = (event) => setWinnerCode(event.target.value);
 
   const handleClickSetter = () => {
-    window.alert("Done!", winnerCode);
+    window.alert("Done!");
+    setShowSetter(!showSetter);
   };
   const handleToggleSetter = () => {
     setShowSetter(!showSetter);
