@@ -181,7 +181,7 @@ const Index = (props) => {
               <div className="">
                 <div className="flex gap-3 pt-6 ">
                   <h1>Random Picker</h1>
-                  <h2>icon</h2>
+                  <img src="install.svg" alt="icon" className="mobileIcon" />
                 </div>
               </div>
             </div>

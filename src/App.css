@@ -150,3 +150,11 @@ a {
   text-align: center !important;
   font-size: 24px !important;
 }
+
+.mobileIcon {
+  border: none;
+  cursor: pointer;
+  height: 24px;
+  margin-right: 16px;
+  width: 24px;
+}
